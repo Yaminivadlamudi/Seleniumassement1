@@ -1,0 +1,63 @@
+//Testcase 2 
+
+1.Navigate to facebook application 
+2.capture the location of create new account button.
+3.Capture the Dom Attribute and dom property for email address textfield before and after entering email address
+4.click on create new account capture the size of submit button
+5.capture the css properties of submit button (minimum 3).
+
+
+package facebook;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Testcase2 {
+
+	public static void main(String[] args) throws InterruptedException {
+
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+		driver.get("https://www.facebook.com/");
+
+		WebElement create = driver.findElement(By.xpath("//a[text()='Create new account']"));
+
+		System.out.println("X location = " + create.getLocation().getX());
+		System.out.println("Y location = " + create.getLocation().getY());
+
+		create.click();
+
+		Thread.sleep(2000);
+
+		WebElement email = driver.findElement(By.name("reg_email__"));
+
+		System.out.println("Before entering email");
+
+		System.out.println("Attribute = " + email.getAttribute("value"));
+		System.out.println("Property = " + email.getDomProperty("value"));
+
+		email.sendKeys("test@gmail.com");
+
+		System.out.println("After entering email");
+
+		System.out.println("Attribute = " + email.getAttribute("value"));
+		System.out.println("Property = " + email.getDomProperty("value"));
+
+		WebElement submit = driver.findElement(By.name("websubmit"));
+
+		System.out.println("Submit button width = " + submit.getSize().getWidth());
+		System.out.println("Submit button height = " + submit.getSize().getHeight());
+
+		System.out.println("Background color = " + submit.getCssValue("background-color"));
+		System.out.println("Font size = " + submit.getCssValue("font-size"));
+		System.out.println("Font family = " + submit.getCssValue("font-family"));
+
+		driver.quit();
+	}
+}
