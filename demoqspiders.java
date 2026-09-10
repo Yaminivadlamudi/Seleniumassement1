@@ -1,0 +1,47 @@
+
+//Testcase 2
+
+1.NAvigate to demo appa qspiders date picker---  (https://demoapps.qspiders.com/ui/datePick?sublist=0)
+2.Click on calender.
+3. Navigate to the next month in the current year.
+4. Select any valid date from that month.
+5. Verify that the selected date is displayed correctly in the date field.
+
+
+package assessments;
+
+import java.time.Duration;
+import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class DemoAppQspidersD3 {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.get("https://demoapps.qspiders.com/ui/datePick?sublist=0");
+        driver.findElement(By.xpath("//*[name()='svg' and @viewBox='0 0 1024 1024']")).click();
+        Thread.sleep(5000);
+        driver.findElement(By.xpath("//button[@class='react-datepicker__navigation react-datepicker__navigation--next']")).click();
+        Thread.sleep(5000);
+        driver.findElement(By.xpath("//div[text()='10']")).click();
+        Thread.sleep(5000);
+        WebElement ele=driver.findElement(By.xpath("//input[@placeholder='Select A Date']"));
+        String actualdate=ele.getAttribute("value");
+        System.out.println(actualdate);
+        if(actualdate.equals("10/10/2026"))
+        {
+        	System.out.println("Date is displayed correctly\"");
+        }
+        else
+        {
+        	System.out.println("Date is not displayed correctly\"");
+        }
+        driver.quit();
+    }
+}
